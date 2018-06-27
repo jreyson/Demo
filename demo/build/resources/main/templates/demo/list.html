@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>资产管理</title>
+</head>
+<body>
+	<div th:replace="~{fragments/header :: header}"></div>
+	<h3 th:text="${deskModel.title}"></h3>
+	<div>
+		<a href="/demo/form.html" th:href="@{/demo/form}">新建桌子</a>
+	</div>
+	<table border="1">
+		<thead>
+			<tr>
+				<td>ID</td>
+				<td>Color</td>
+				<td>Size</td>
+				<td>Price</td>
+				<td>Status</td>
+				<td>Office</td>
+				<td>操作</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${deskModel.deskList.size()} eq 0">
+				<td colspan="6">没有信息</td>
+			</tr>
+			<tr th:each="desk : ${deskModel.deskList}">
+				<td th:text="${desk.id}"></td>
+				<td th:text="${desk.color}"></td>
+				<td th:text="${desk.size}"></td>
+				<td th:text="${desk.price}"></td>
+				<td th:text="${desk.status}"></td>
+				<td th:text="${desk.office}"></td>
+				<td th:if="${desk.status} eq 可用")>
+					<a th:href="@{'/demo/use/'+${desk.id}}" th:text="使用"></a>
+				</td>
+				<td th:if="${desk.status} eq 使用中")>
+					<a th:href="@{'/demo/fix/'+${desk.id}}" th:text="维修"></a>
+				</td>
+				<td th:if="${desk.status} eq 维修中")>
+					<a th:href="@{'/demo/fixed/'+${desk.id}}" th:text="维修完成"></a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

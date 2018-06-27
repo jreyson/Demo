@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>新建</title>
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+<h3 th:text="${deskModel.title}"></h3>
+<form action="/demo" th:action="@{/demo}" method="POST" th:object="${deskModel.desk}">
+	<input type="hidden" name="id" th:value="*{id}">
+	颜色：<br>
+	<select name="color" th:value="*{color}">
+	  <option value="白色">白色</option>
+	  <option value="黑色">黑色</option>
+	</select>
+	<br>
+	尺寸：<br>
+	<select name="size" th:value="*{size}">
+	  <option value="160cm">160cm</option>
+	  <option value="120cm">120cm</option>
+	</select>
+	<br>
+	价格：<br>
+	<input type="text" name="price" th:value="*{price}">
+	<br>
+	价格：<br>
+	<select name="status" th:value="*{status}">
+	  <option value="可用">可用</option>
+	  <option value="维修中">维修中</option>
+	  <option value="使用中">使用中</option>
+	</select>
+	<br>
+	<input type="submit" value="提交">
+</form>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
